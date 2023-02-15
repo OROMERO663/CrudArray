@@ -14,7 +14,7 @@ public class SalidaDeDatos {
 		
 
 	}
-	public static int mostrarMenu() {
+	public static void mostrarMenu() {
 		
 		System.out.println("¿Qué quieres hacer con tu lista de juegos?");
 		System.out.println("1 - Añadir");
@@ -23,7 +23,7 @@ public class SalidaDeDatos {
 		System.out.println("4 - Eliminar");
 		System.out.println("5 - Salir");
 
-		return 5; 
+	
 
 	}
 
