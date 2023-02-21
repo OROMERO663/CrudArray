@@ -22,11 +22,12 @@ public class Principal {
 		inicializar(generos, "");
 		inicializar(duraciones, "");
 		System.out.println(Arrays.toString(juegos));
-			/*Comprobación por pantalla de que los datos se están guardando correctamente
-			 * System.out.println(Arrays.toString(generos));
-			 * System.out.println(Arrays.toString(duraciones));
-			 */
-		System.out.println("*************************");
+		/*
+		 * Comprobación por pantalla de que los datos se están guardando correctamente
+		 * System.out.println(Arrays.toString(generos));
+		 * System.out.println(Arrays.toString(duraciones));
+		 */
+		System.out.println("*****************************");
 
 		do {
 			SalidaDeDatos.mostrarMenu();
@@ -57,6 +58,7 @@ public class Principal {
 					SalidaDeDatos.TuLista(juegos);
 					break;
 				case 5:
+					SalidaDeDatos.Salida();
 					salir = true;
 					break;
 
@@ -96,6 +98,50 @@ public class Principal {
 			contador++;
 		}
 		return posicion;
+	}
+
+	private static void crear2(String[] lista, String[] lista2, String[] lista3, String dato) {
+
+		String nuevoJuego;
+		String nuevoGenero;
+		String nuevaDuracion;
+		int longitud = lista.length;
+		boolean encontrado = false;
+		int contador = 0;
+
+		System.out.println("Escribe el juego que quieres añadir");
+
+		Scanner lector = new Scanner(System.in);
+		nuevoJuego = lector.nextLine();
+		lector.nextLine();
+
+		System.out.println("Escribe el género de " + nuevoJuego);
+
+		Scanner lector2 = new Scanner(System.in);
+		nuevoGenero = lector2.nextLine();
+		lector2.nextLine();
+
+		System.out.println("Escribe la duración media en minutos de " + nuevoJuego);
+
+		Scanner lector3 = new Scanner(System.in);
+		nuevaDuracion = lector3.nextLine();
+		lector3.nextLine();
+
+		do {
+			if (lista[contador].equals(dato)) {
+				encontrado = true;
+				lista[contador] = nuevoJuego;
+				lista2[contador] = nuevoGenero;
+				lista3[contador] = nuevaDuracion;
+				System.out.println("El juego " + nuevoJuego + " ha sido añadido a tu lista");
+			}
+			contador++;
+			if (contador >= longitud && !encontrado) {
+				System.out.println("No puedes añadir más juegos");
+				System.out.println("Prueba con otras opciones");
+			}
+		} while (contador < longitud && !encontrado);
+
 	}
 
 	private static void consultar(String[] lista, String[] lista2, String[] lista3) {
@@ -201,49 +247,5 @@ public class Principal {
 				System.out.println("El juego no está en tu lista");
 			}
 		} while (contador < longitud && !encontrado);
-	}
-
-	private static void crear2(String[] lista, String[] lista2, String[] lista3, String dato) {
-
-		String nuevoJuego;
-		String nuevoGenero;
-		String nuevaDuracion;
-		int longitud = lista.length;
-		boolean encontrado = false;
-		int contador = 0;
-
-		System.out.println("Escribe el juego que quieres añadir");
-
-		Scanner lector = new Scanner(System.in);
-		nuevoJuego = lector.nextLine();
-		lector.nextLine();
-
-		System.out.println("Escribe el género de " + nuevoJuego);
-
-		Scanner lector2 = new Scanner(System.in);
-		nuevoGenero = lector2.nextLine();
-		lector2.nextLine();
-
-		System.out.println("Escribe la duración media en minutos de " + nuevoJuego);
-
-		Scanner lector3 = new Scanner(System.in);
-		nuevaDuracion = lector3.nextLine();
-		lector3.nextLine();
-
-		do {
-			if (lista[contador].equals(dato)) {
-				encontrado = true;
-				lista[contador] = nuevoJuego;
-				lista2[contador] = nuevoGenero;
-				lista3[contador] = nuevaDuracion;
-				System.out.println("El juego " + nuevoJuego + " ha sido añadido a tu lista");
-			}
-			contador++;
-			if (contador >= longitud && !encontrado) {
-				System.out.println("No puedes añadir más juegos");
-				System.out.println("Prueba con otras opciones");
-			}
-		} while (contador < longitud && !encontrado);
-
 	}
 }
