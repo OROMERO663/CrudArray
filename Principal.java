@@ -1,6 +1,7 @@
 package crudArray;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Principal {
@@ -8,6 +9,8 @@ public class Principal {
 	public static void main(String[] args) {
 
 		String[] juegos = new String[20];
+		String[] generos = new String[20];
+		String[] duraciones = new String[20];
 		int eleccion;
 		boolean salir = false;
 		int posicion = -1;
@@ -16,41 +19,53 @@ public class Principal {
 				"Tu lista actual de juegos es:");
 
 		inicializar(juegos, "");
+		inicializar(generos, "");
+		inicializar(duraciones, "");
 		System.out.println(Arrays.toString(juegos));
+			/*Comprobación por pantalla de que los datos se están guardando correctamente
+			 * System.out.println(Arrays.toString(generos));
+			 * System.out.println(Arrays.toString(duraciones));
+			 */
 		System.out.println("*************************");
 
 		do {
 			SalidaDeDatos.mostrarMenu();
 			posicion = buscarLibre(juegos, "");
+			posicion = buscarLibre(generos, "");
+			posicion = buscarLibre(duraciones, "");
 
-			Scanner lector = new Scanner(System.in);
-			eleccion = lector.nextInt();
-			lector.nextLine();
+			try {
+				Scanner lector = new Scanner(System.in);
+				eleccion = lector.nextInt();
+				lector.nextLine();
 
-			switch (eleccion) {
-			case 1:
-				crear2(juegos, "");
-				SalidaDeDatos.TuLista(juegos);
-				break;
-			case 2:
-				consultar(juegos);
-				SalidaDeDatos.TuLista(juegos);
-				break;
-			case 3:
-				modificar(juegos);
-				SalidaDeDatos.TuLista(juegos);
-				break;
-			case 4:
-				eliminar(juegos);
-				SalidaDeDatos.TuLista(juegos);
-				break;
-			case 5:
-				salir = true;
-				break;
+				switch (eleccion) {
+				case 1:
+					crear2(juegos, generos, duraciones, "");
+					SalidaDeDatos.TuLista(juegos);
+					break;
+				case 2:
+					consultar(juegos, generos, duraciones);
+					SalidaDeDatos.TuLista(juegos);
+					break;
+				case 3:
+					modificar(juegos, generos, duraciones);
+					SalidaDeDatos.TuLista(juegos);
+					break;
+				case 4:
+					eliminar(juegos, generos, duraciones);
+					SalidaDeDatos.TuLista(juegos);
+					break;
+				case 5:
+					salir = true;
+					break;
 
-			default:
-				System.out.println("No has elegido una opción válida");
-				break;
+				default:
+					System.out.println("No has elegido una opción válida");
+					break;
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Debes elegir una opción entre 1 y 5");
 			}
 
 		} while (!salir);
@@ -64,7 +79,6 @@ public class Principal {
 		for (int i = 0; i < longitud; i++) {
 			lista[i] = dato;
 		}
-
 	}
 
 	private static int buscarLibre(String[] lista, String dato) {
@@ -84,7 +98,7 @@ public class Principal {
 		return posicion;
 	}
 
-	private static void consultar(String[] lista) {
+	private static void consultar(String[] lista, String[] lista2, String[] lista3) {
 
 		String nombreJuego;
 		int longitud = lista.length;
@@ -99,20 +113,23 @@ public class Principal {
 
 		do {
 			if (lista[contador].equals(nombreJuego)) {
-				System.out.println("El juego está en tu lista");
+				System.out.println(nombreJuego + " está en tu lista, es un juego de " + lista2[contador]
+						+ " y tiene una duración de " + lista3[contador] + " minutos ");
 				encontrado = true;
 			}
 			contador++;
 			if (contador == longitud && !encontrado) {
-				System.out.println("El juego no está en tu lista");
+				System.out.println(nombreJuego + " no está en tu lista");
 			}
 		} while (contador < longitud && !encontrado);
 	}
 
-	private static void modificar(String[] lista) {
+	private static void modificar(String[] lista, String[] lista2, String[] lista3) {
 
 		String modifJuego;
 		String nombreJuego;
+		String nuevoGenero;
+		String nuevaDuracion;
 		int longitud = lista.length;
 		boolean encontrado = false;
 		int contador = 0;
@@ -126,25 +143,41 @@ public class Principal {
 		do {
 			if (lista[contador].equals(modifJuego)) {
 				encontrado = true;
-				System.out.println("Escribe el nuevo juego modificado");
+				System.out.println("Escribe el nombre del juego actualizado");
 
 				Scanner lector1 = new Scanner(System.in);
 				nombreJuego = lector1.nextLine();
 				lector1.nextLine();
 
+				System.out.println("Escribe el genero de " + nombreJuego);
+
+				Scanner lector2 = new Scanner(System.in);
+				nuevoGenero = lector2.nextLine();
+				lector1.nextLine();
+
+				System.out.println("Escribe la duración en minutos de " + nombreJuego);
+
+				Scanner lector3 = new Scanner(System.in);
+				nuevaDuracion = lector3.nextLine();
+				lector1.nextLine();
+
 				lista[contador] = nombreJuego;
+				lista2[contador] = nuevoGenero;
+				lista3[contador] = nuevaDuracion;
 			}
 			contador++;
 			if (contador == longitud && !encontrado) {
-				System.out.println("El juego no está en tu lista");
+				System.out.println(modifJuego + " no está en tu lista");
 			}
 		} while (contador < longitud && !encontrado);
 
 	}
 
-	private static void eliminar(String[] lista) {
+	private static void eliminar(String[] lista, String[] lista2, String[] lista3) {
 
 		String eliminarJuego;
+		String eliminarGenero;
+		String eliminarDuracion;
 		int longitud = lista.length;
 		boolean encontrado = false;
 		int contador = 0;
@@ -159,6 +192,8 @@ public class Principal {
 			if (lista[contador].equals(eliminarJuego)) {
 				encontrado = true;
 				lista[contador] = "";
+				lista2[contador] = "";
+				lista3[contador] = "";
 				System.out.println("El juego " + eliminarJuego + " ha sido eliminado de tu lista");
 			}
 			contador++;
@@ -168,9 +203,11 @@ public class Principal {
 		} while (contador < longitud && !encontrado);
 	}
 
-	private static void crear2(String[] lista, String dato) {
+	private static void crear2(String[] lista, String[] lista2, String[] lista3, String dato) {
 
 		String nuevoJuego;
+		String nuevoGenero;
+		String nuevaDuracion;
 		int longitud = lista.length;
 		boolean encontrado = false;
 		int contador = 0;
@@ -181,10 +218,24 @@ public class Principal {
 		nuevoJuego = lector.nextLine();
 		lector.nextLine();
 
+		System.out.println("Escribe el género de " + nuevoJuego);
+
+		Scanner lector2 = new Scanner(System.in);
+		nuevoGenero = lector2.nextLine();
+		lector2.nextLine();
+
+		System.out.println("Escribe la duración media en minutos de " + nuevoJuego);
+
+		Scanner lector3 = new Scanner(System.in);
+		nuevaDuracion = lector3.nextLine();
+		lector3.nextLine();
+
 		do {
 			if (lista[contador].equals(dato)) {
 				encontrado = true;
 				lista[contador] = nuevoJuego;
+				lista2[contador] = nuevoGenero;
+				lista3[contador] = nuevaDuracion;
 				System.out.println("El juego " + nuevoJuego + " ha sido añadido a tu lista");
 			}
 			contador++;
@@ -196,89 +247,3 @@ public class Principal {
 
 	}
 }
-
-/*
- * MENU MAL HECHO private static int gestionar(int eleccion) { // private - solo
- * lo podemos usar en esta clase // void - en nuestra practica a lo mejor no
- * tiene que ser void // int eleccion - es el parametro de entrada (el 1 añadir
- * por ejemplo)
- * 
- * Scanner lector = new Scanner(System.in); eleccion = lector.nextInt();
- * lector.nextLine();
- * 
- * switch (eleccion) { case 1: // AÑADIR // crear(juegos, "x", posicion); //
- * llamada al metodo en private más abajo en // este Main
- * 
- * 
- * break;
- * 
- * default: break;
- * 
- * } return eleccion; }
- */
-
-/*
- * CREAR MAL HECHO, DENTRO DEL CASE 1 if (posicion >= 4) {
- * System.out.println("No puedes añadir más juegos"); } else if (posicion <
- * juegos.length) {
- * 
- * crear(juegos, "", posicion); SalidaDeDatos.TuLista(juegos); }
- */
-
-/*
- * CREAR MAL HECHO DENTRO DEL METODO CREAR private static void crear(String[]
- * lista, String dato, int posicion) { // aqui haríamos el codigo para crear
- * Array, para añadir el juego String nuevoJuego; int longitud = lista.length;
- * boolean encontrado = false; int contador = 0;
- * 
- * System.out.println("Escribe el juego que quieres añadir");
- * 
- * Scanner lector = new Scanner(System.in); nuevoJuego = lector.nextLine();
- * lector.nextLine();
- * 
- * 
- * while (contador < longitud && !encontrado) { if
- * (lista[contador].equals(dato)) { encontrado = true; lista[posicion] =
- * nuevoJuego; } // si no lo he encontrado contador++; }
- * 
- * }
- */
-
-/*
- * APUNTES: Hacer el menu de opciones
- * 
- * 1 Crear 2 consultar 3 Modificar 4 Eliminar - puede que se haga Modificando
- * por hueco vacio 5 Salir
- * 
- * Tema: Juegoteca Juego y 4 máximo para probar Ampliar a 20 juegos cuando
- * funcione
- * 
- * Luego ampliar a Juego Categoria Jugadores
- *
- * 
- * Hacer la opcion Crear Te tiene que pedir el nombre del juego y guardarlo en
- * el primer hueco libre del array
- * 
- * Luego intentar que te pida el Nombre Categ y Jugadores
- *
- * Hacer la opcion consultar
- * 
- * Te tiene que dejar ver si tienes un juego guardado (buscar por nombre)
- * 
- * Lo veo dificil pero podrían buscar tambien por categoria y jugadores??
- * 
- * Hacer la opcion modificar
- * 
- * Te deja modificar el nombre
- * 
- * Te deja modificar el nombre cat y jug
- * 
- * Hacer la opcion Eliminar
- * 
- * Lo mismo que modificar pero modifica a vacio ese hueco se me ocurre un
- * consultar primero y modificar a vacio después
- * 
- * Hacer la opcion Salir - finaliza el programa
- * 
- * 
- */
