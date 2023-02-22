@@ -4,8 +4,25 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Actividad 1. Programa para Añadir, Consultar, Modificar o Eliminar 
+ * juegos de mesa
+ * 
+ * @author Oscar
+ * @version 1
+ */
 public class Principal {
-
+	
+	/**
+	 * Metodo Principal muestra el menu de opciones y llama al metodo correspondiente para ejecutar la opcion elegida
+	 * Interaccion por consola: pide al usuario elegir una opcion del menu
+	 * Mensajes por consola: saca un mensaje de bienvenida al juego
+	 * Mensajes por consola: saca un mensaje recordando la lista de juegos actualizada
+	 * Mensajes por consola: saca un mensaje de error si el dato introducido no es valido
+	 * 
+	 * @author Oscar
+	 * @param args Dato de entrada
+	 */
 	public static void main(String[] args) {
 
 		String[] juegos = new String[20];
@@ -22,11 +39,7 @@ public class Principal {
 		inicializar(generos, "");
 		inicializar(duraciones, "");
 		System.out.println(Arrays.toString(juegos));
-		/*
-		 * Comprobación por pantalla de que los datos se están guardando correctamente
-		 * System.out.println(Arrays.toString(generos));
-		 * System.out.println(Arrays.toString(duraciones));
-		 */
+
 		System.out.println("*****************************");
 
 		do {
@@ -42,7 +55,7 @@ public class Principal {
 
 				switch (eleccion) {
 				case 1:
-					crear2(juegos, generos, duraciones, "");
+					crear(juegos, generos, duraciones, "");
 					SalidaDeDatos.TuLista(juegos);
 					break;
 				case 2:
@@ -73,7 +86,14 @@ public class Principal {
 		} while (!salir);
 
 	}
-
+	
+	/**
+	 * inicializar Inicializa un Array completo con un Dato de entrada
+	 * 
+	 * @author Oscar
+	 * @param lista Es el Array que entra para ser inicializado
+	 * @param dato Es el parametro con el que se llenan las posiciones del Array
+	 */
 	private static void inicializar(String[] lista, String dato) {
 
 		int longitud = lista.length;
@@ -82,7 +102,16 @@ public class Principal {
 			lista[i] = dato;
 		}
 	}
-
+	
+	/**
+	 * buscarLibre Busca la primera posicion dentro de un Array que coincide con el Dato que considera como libre
+	 * Devuelve esa posicion al programa principal como variable (int posicion)
+	 * 
+	 * @author Oscar
+	 * @param lista Es el Array que entra para buscar la primera posicion libre
+	 * @param dato Es el parametro que busca para tomarlo como libre y guardar su posicion
+	 * @return posicion Es el parametro que devuelve la posicion encontrada como libre
+	 */
 	private static int buscarLibre(String[] lista, String dato) {
 
 		int posicion = -1;
@@ -99,8 +128,21 @@ public class Principal {
 		}
 		return posicion;
 	}
-
-	private static void crear2(String[] lista, String[] lista2, String[] lista3, String dato) {
+	
+	/**
+	 * crear añade un nuevo juego a la lista 
+	 * Interaccion por consola: pide al usuario el nombre, genero y duracion de un juego de mesa
+	 * Mensajes por consola: saca un mensaje de confirmacion si el juego se ha añadido a la lista
+	 * Mensajes por consola: saca un mensaje de error si no se ha podido añadir el juego a la lista
+	 * Asigna los datos introducidos por el usuario en una posicion de los Arrays correspondientes 
+	 * 
+	 * @author Oscar
+	 * @param lista Es el Array que entra para que se le asigne el primer dato requerido por consola
+	 * @param lista2 Es el Array que entra para que se le asigne el segundo dato requerido por consola
+	 * @param lista3 Es el Array que entra para que se le asigne el tercer dato requerido por consola
+	 * @param dato Es el parametro que tomamos como libre para asignar los datos introducidos por el usuario
+	 */
+	private static void crear(String[] lista, String[] lista2, String[] lista3, String dato) {
 
 		String nuevoJuego;
 		String nuevoGenero;
@@ -143,7 +185,20 @@ public class Principal {
 		} while (contador < longitud && !encontrado);
 
 	}
-
+	
+	/**
+	 * consultar permite consultar los datos guardados de un juego de la lista
+	 * Interaccion por consola: pide al usuario el nombre del juego a consultar
+	 * Mensajes por consola: saca los datos del juego consultado
+	 * Mensajes por consola: saca mensaje de error si el juego consultado no esta en la lista
+	 * Compara el dato introducido por el usuario con los almacenados el las distintas posiciones del Array juegos
+	 * Encuentra coincidencia y saca por consola los datos almacenados en los Array juegos, generos, duraciones correspondientes a ese juego
+	 * 
+	 * @author Oscar
+	 * @param lista Es el Array que entra para comparar el dato requerido por consola y dar la informacion acerca del nombre del juego
+	 * @param lista2 Es el Array que entra para dar la informacion acerca del genero del juego
+	 * @param lista3 Es el Array que entra para dar la informacion acerca de la duracion del juego
+	 */
 	private static void consultar(String[] lista, String[] lista2, String[] lista3) {
 
 		String nombreJuego;
@@ -169,7 +224,20 @@ public class Principal {
 			}
 		} while (contador < longitud && !encontrado);
 	}
-
+	
+	/**
+	 * modificar permite cambiar los datos de un juego guardado en la lista
+	 * Interaccion por consola: pide al usuario el nombre de un juego de mesa guardado en la lista
+	 * Interaccion por consola: pide al usuario el genero y la duracion si ha encontrado el juego en la lista
+	 * Mensajes por consola: saca mensaje de error si el juego no esta en la lista
+	 * Asigna los datos introducidos por el usuario en los Arrays correspondientes en la posicion 
+	 * coincidente con la que ocupaba el nombre del juego introducido
+	 * 
+	 * @author Oscar
+	 * @param lista Es el Array que entra para buscar la coincidencia con el dato introducido por el usuario en alguna de sus posiciones y en caso de encontrarse se le asigne el primer dato introducido por consola
+	 * @param lista2 Es el Array que entra para que se le asigne el segundo dato requerido por consola
+	 * @param lista3 Es el Array que entra para que se le asigne el tercer dato requerido por consola
+	 */
 	private static void modificar(String[] lista, String[] lista2, String[] lista3) {
 
 		String modifJuego;
@@ -218,7 +286,21 @@ public class Principal {
 		} while (contador < longitud && !encontrado);
 
 	}
-
+	
+	/**
+	 * eliminar permite borrar un juego de la lista y sus datos asociados 
+	 * Interaccion por consola: pide al usuario el nombre del juego a eliminar de la lista
+	 * Mensajes por consola: saca mensaje confirmando que el juego ha sido eliminado
+	 * Mensajes por consola: saca mensaje de error si el juego introducido no esta en la lista
+	 * Compara el dato introducido por el usuario con los almacenados el las distintas posiciones del Array juegos
+	 * Encuentra coincidencia y sustituye el dato encontrado por vacio, dejando libre la posicion en el Array juegos 
+	 * y a su vez las correspondientes en los Arrays generos y duraciones
+	 * 
+	 * @author Oscar
+	 * @param lista Es el Array que entra para comparar el dato requerido por consola y eliminar el dato nombre del juego de la posicion encontrada
+	 * @param lista2 Es el Array que entra para eliminar el dato acerca del genero del juego
+	 * @param lista3 Es el Array que entra para eliminar el dato acerca de la duracion del juego del juego
+	 */
 	private static void eliminar(String[] lista, String[] lista2, String[] lista3) {
 
 		String eliminarJuego;
