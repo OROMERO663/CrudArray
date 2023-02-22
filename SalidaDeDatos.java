@@ -3,7 +3,7 @@ package crudArray;
 import java.util.Arrays;
 
 /**
- * Actividad 1. Programa para mostrar mensajes por consola
+ * Actividad 1. Salida de datos es una clase auxiliar para mostrar mensajes por consola
  * 
  * @author Oscar
  * @version 1
@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class SalidaDeDatos {
 
 	/**
-	 * MostrarInicio muestra el mensaje de bienvenida por consola
+	 * El metodo MostrarInicio muestra el mensaje de bienvenida por consola
 	 * Mensajes por consola: mensaje de bienvenida
 	 * 
 	 * @author Oscar
@@ -31,7 +31,7 @@ public class SalidaDeDatos {
 	}
 
 	/**
-	 * MostrarMenu saca el menu de opciones por consola 
+	 * El metodo MostrarMenu saca el menu de opciones por consola 
 	 * Mensaje por consola: Menu principal
 	 * 
 	 * @author Oscar
@@ -48,7 +48,7 @@ public class SalidaDeDatos {
 	}
 
 	/**
-	 * TuLista da informacion de la lista de juegos actualizada
+	 * El metodo TuLista da informacion de la lista de juegos actualizada
 	 * Mensajes por consola: lista de juegos actualizada
 	 * 
 	 * @author Oscar
@@ -61,7 +61,7 @@ public class SalidaDeDatos {
 	}
 
 	/**
-	 * Salida da el mensaje de salida del programa
+	 * EL metodo Salida da el mensaje de salida del programa
 	 * Mensaje por consola de finalizacion del programa
 	 * 
 	 * @author Oscar

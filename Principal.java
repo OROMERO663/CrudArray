@@ -5,8 +5,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Actividad 1. Programa para Añadir, Consultar, Modificar o Eliminar 
- * juegos de mesa
+ * Actividad 1. Programa para Incluir, Consultar, Modificar o Eliminar 
+ * juegos de mesa en una Juegoteca con espacio para 20 juegos
  * 
  * @author Oscar
  * @version 1
@@ -30,7 +30,6 @@ public class Principal {
 		String[] duraciones = new String[20];
 		int eleccion;
 		boolean salir = false;
-		int posicion = -1;
 
 		SalidaDeDatos.mostrarInicio("Bienvenido", "A tu juegoteca", "Puedes guardar hasta 20 juegos de mesa",
 				"Tu lista actual de juegos es:");
@@ -44,9 +43,6 @@ public class Principal {
 
 		do {
 			SalidaDeDatos.mostrarMenu();
-			posicion = buscarLibre(juegos, "");
-			posicion = buscarLibre(generos, "");
-			posicion = buscarLibre(duraciones, "");
 
 			try {
 				Scanner lector = new Scanner(System.in);
@@ -88,7 +84,7 @@ public class Principal {
 	}
 	
 	/**
-	 * inicializar Inicializa un Array completo con un Dato de entrada
+	 * El metodo inicializar Inicializa un Array completo con un Dato de entrada
 	 * 
 	 * @author Oscar
 	 * @param lista Es el Array que entra para ser inicializado
@@ -104,42 +100,16 @@ public class Principal {
 	}
 	
 	/**
-	 * buscarLibre Busca la primera posicion dentro de un Array que coincide con el Dato que considera como libre
-	 * Devuelve esa posicion al programa principal como variable (int posicion)
-	 * 
-	 * @author Oscar
-	 * @param lista Es el Array que entra para buscar la primera posicion libre
-	 * @param dato Es el parametro que busca para tomarlo como libre y guardar su posicion
-	 * @return posicion Es el parametro que devuelve la posicion encontrada como libre
-	 */
-	private static int buscarLibre(String[] lista, String dato) {
-
-		int posicion = -1;
-		int longitud = lista.length;
-		boolean encontrado = false;
-		int contador = 0;
-
-		while (contador < longitud && !encontrado) {
-			if (lista[contador].equals(dato)) {
-				encontrado = true;
-				posicion = contador;
-			}
-			contador++;
-		}
-		return posicion;
-	}
-	
-	/**
-	 * crear añade un nuevo juego a la lista 
+	 * El metodo crear incluye un nuevo juego a la lista 
 	 * Interaccion por consola: pide al usuario el nombre, genero y duracion de un juego de mesa
-	 * Mensajes por consola: saca un mensaje de confirmacion si el juego se ha añadido a la lista
-	 * Mensajes por consola: saca un mensaje de error si no se ha podido añadir el juego a la lista
+	 * Mensajes por consola: saca un mensaje de confirmacion si el juego se ha incluido en la lista
+	 * Mensajes por consola: saca un mensaje de error si no se ha podido incluir el juego en la lista
 	 * Asigna los datos introducidos por el usuario en una posicion de los Arrays correspondientes 
 	 * 
 	 * @author Oscar
-	 * @param lista Es el Array que entra para que se le asigne el primer dato requerido por consola
-	 * @param lista2 Es el Array que entra para que se le asigne el segundo dato requerido por consola
-	 * @param lista3 Es el Array que entra para que se le asigne el tercer dato requerido por consola
+	 * @param lista Es el Array que entra para que se le asigne el dato nombre requerido por consola
+	 * @param lista2 Es el Array que entra para que se le asigne el dato genero requerido por consola
+	 * @param lista3 Es el Array que entra para que se le asigne el dato duracion requerido por consola
 	 * @param dato Es el parametro que tomamos como libre para asignar los datos introducidos por el usuario
 	 */
 	private static void crear(String[] lista, String[] lista2, String[] lista3, String dato) {
@@ -187,7 +157,7 @@ public class Principal {
 	}
 	
 	/**
-	 * consultar permite consultar los datos guardados de un juego de la lista
+	 * El metodo consultar permite consultar los datos guardados de un juego de la lista
 	 * Interaccion por consola: pide al usuario el nombre del juego a consultar
 	 * Mensajes por consola: saca los datos del juego consultado
 	 * Mensajes por consola: saca mensaje de error si el juego consultado no esta en la lista
@@ -226,7 +196,7 @@ public class Principal {
 	}
 	
 	/**
-	 * modificar permite cambiar los datos de un juego guardado en la lista
+	 * El metodo modificar permite cambiar los datos de un juego guardado en la lista
 	 * Interaccion por consola: pide al usuario el nombre de un juego de mesa guardado en la lista
 	 * Interaccion por consola: pide al usuario el genero y la duracion si ha encontrado el juego en la lista
 	 * Mensajes por consola: saca mensaje de error si el juego no esta en la lista
@@ -288,7 +258,7 @@ public class Principal {
 	}
 	
 	/**
-	 * eliminar permite borrar un juego de la lista y sus datos asociados 
+	 * El metodo eliminar permite borrar un juego de la lista y sus datos asociados 
 	 * Interaccion por consola: pide al usuario el nombre del juego a eliminar de la lista
 	 * Mensajes por consola: saca mensaje confirmando que el juego ha sido eliminado
 	 * Mensajes por consola: saca mensaje de error si el juego introducido no esta en la lista
